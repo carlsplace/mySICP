@@ -1,0 +1,11 @@
+; tail recursion version
+(define (* a b)
+  (define (double x) (+ x x))
+  (define (halve x) (/ x 2))
+  (define (iter a b product)
+    (cond ((= b 0) product) ;not ((= b 0) 0)
+          ((even? b) (iter (double a) (halve b) product))
+          (else (iter a (- b 1) (+ product a)))))
+  (iter a b 0)) ;not (iter a b 1))
+(* 9 9)
+(* 0 10)

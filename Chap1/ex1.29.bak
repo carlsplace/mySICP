@@ -1,0 +1,8 @@
+(define (sum f a next b)
+  (if (> a b)
+      0
+      (+ (f a)
+         (sum f (next a) next b))))
+(define (simpson-integral f a b n)
+  (define h (/ (- b a) n))
+  (define add-h

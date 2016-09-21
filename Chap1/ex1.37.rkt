@@ -11,7 +11,7 @@
                 (lambda (i) 1.0)
                 100)
 
-;recursion 子问题分解要正确，应该从最内层往外递归，而不是第一反应的从外向内递归，所以难写。
+;recursion 子问题分解要正确，注意和iter之间的区别，iter是有k到1，recur是有1到k。iter的关键点是有一个“存档”的地方，保存了中间态，若是从1到k则iter无法保存中间态。
  (define (cont-frac n d k) 
    (define (frac-rec i) 
      (/ (n i) 

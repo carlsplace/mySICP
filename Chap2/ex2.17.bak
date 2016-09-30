@@ -1,0 +1,10 @@
+(define (last-pair list)
+  (list-ref list (- (lenth list) 1)))
+(define (lenth list)
+  (define (iter a count)
+    (if (null? a)
+        count
+        (iter (cdr a)
+              (+ 1 count))))
+  (iter list 0))
+(last-pair (list 23 72 149 34))

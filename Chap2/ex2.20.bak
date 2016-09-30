@@ -1,0 +1,13 @@
+(define (same-parity a . l)
+  (define (iter l result)
+    (if (null? l)
+        result
+        (iter (cdr l) (if (or (and (odd? a) (odd? (car l)))
+                              (and (even? a) (even? (car l))))
+                          (append result (list (car l)))
+                          result))))
+  (iter l (list a)))
+   
+(display (same-parity 1 2 3 4 5 6 7))
+(newline)
+(display (same-parity 2 3 4 5 6 7))

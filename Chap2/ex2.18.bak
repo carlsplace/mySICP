@@ -1,0 +1,16 @@
+(define (lenth list)
+  (define (iter a count)
+    (if (null? a)
+        count
+        (iter (cdr a)
+              (+ 1 count))))
+  (iter list 0))
+(define (reverse list)
+  (define (iter a result)
+    (if (null? a)
+        result
+        (iter (cdr a) (cons (car a) result))))
+  (iter list nil))
+
+(list 1 4 9 16 25)
+(reverse (list 1 4 9 16 25))

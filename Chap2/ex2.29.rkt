@@ -1,0 +1,67 @@
+(define (make-mobile left right)
+  (list left right))
+(define (make-branch length structure)
+  (list length structure))
+
+; a
+(define (left-branch mobile)
+  (car mobile))
+(define (right-branch mobile)
+  (cadr mobile))
+(define (branch-length branch)
+  (car branch))
+(define (branch-structure branch)
+  (cadr branch))
+
+;b
+(define (total-weight mobile)
+  (cond ((null? mobile) 0)
+        ((not (pair? mobile)) mobile)
+        (else (+ (total-weight (left-branch mobile))
+                 (total-weight (right-branch mobile))))))
+;test
+(define b1 (make-branch 1 2))
+(define m1 (make-mobile b1 b1))
+(define b2 (make-branch 3 m1))
+(define m2 (make-mobile b1 b2))
+(total-weight m1)
+(total-weight m2)
+(total-weight b1)
+
+;c
+(define (balanced? mobile)
+  (define (branch-weight branch)
+    (let ((s (branch-structure branch)))
+      (if (pair? s)
+          (total-weight s)
+          s)))
+  (define (torque branch)
+    (* (branch-length branch)
+       (branch-weight branch)))
+  (define (branch-balanced? branch)
+    (let ((s (branch-structure branch)))
+      (if (pair? s)
+          (balanced? s)
+          true)))
+  (let ((left (left-branch mobile))
+        (right (right-branch mobile)))
+    (and (= (torque left)
+            (torque right))
+         (branch-balanced? left)
+         (branch-balanced? right))))
+;test
+(balanced? (make-mobile (make-branch 2 3) 
+                        (make-branch 3 2)))
+
+;d
+(define (left-branch2 mobile)
+  (car mobile))
+(define (right-branch2 mobile)
+  (cdr mobile))
+(define (branch-length2 branch)
+  (car branch))
+(define (branch-structure2 branch)
+  (cdr branch))
+  
+  
+        
